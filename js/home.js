@@ -37,17 +37,22 @@ $(document).ready(function(){
       return m.link(m);
     });
   };
-  
-  $.getJSON('https://api.twitter.com/1/statuses/user_timeline.json?include_rts=true&screen_name=binnov&count=3&callback=?', function(data){
-    $.each(data, function(index, item){
-      $('.twitter').append('<div class="tweet"><span class="tweet-handle"></span><p class="tweet-words">' + item.text.linkify() + '</p><p class="tweet-time">' + relative_time(item.created_at) + '</p></div>');
-    });
-  });
-  
-  $.getJSON("http://api.flickr.com/services/feeds/groups_pool.gne?id=52682713@N00&lang=en-us&format=json&jsoncallback=?", function(data){
-    $.each(data.items, function(index, item){
-      if (index == 6) return false;
-      $('<img/>').attr({'src':item.media.m.replace('_m', '_q'), 'class': 'test'}).appendTo('.flickr').wrap('<a href="' + item.link + '"></a>').wrap('<div class="four-thirds column"></div>');
+
+  $(function(){
+    $.ajax({
+      url: 'http://graph.facebook.com/168163223241202/albums?fields=photos.fields(source,%20link)',
+      dataType: 'jsonp',
+      success: function(data){ 
+        var i = 0;
+        $.each(data.data, function(k1, album){
+          var pictureArray = album.photos.data;
+          $.each(pictureArray, function(k2, pictureObject){
+            if (i > 20) return true;
+            var $img = $('<img/>').prop({ src: pictureObject.source }).appendTo('.fb').wrap('<a href="' + pictureObject.link + '"></a>').wrap('<div class="four-thirds column"></div>');
+            i++;
+          });
+        });
+      }
     });
   });
   
