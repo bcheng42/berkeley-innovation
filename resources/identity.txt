@@ -1,0 +1,20 @@
+# Berkeley Innovation Identity Guidelines
+* Created May 2011
+
+# Color Palette
+* Backgrounds
+* #FFFFFF (white)
+* #F3F2F1 (light gray)
+	
+* Foregrounds
+* #636261 (medium gray)
+* #000000 (black)
+	
+* Accent
+* #F58220 (orange)
+
+# Typefaces
+* Lucida Grande, regular weight
+
+	
+
